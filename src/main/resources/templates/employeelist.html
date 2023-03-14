@@ -48,13 +48,13 @@
             </thead>
             <tbody>
                 <tr data-th-each="emp : ${employees}">
-                    <td><span data-th-text="${emp.id}"></span></td>
-                    <td><span data-th-text="${emp.firstName}"></span></td>
-                    <td><span data-th-text="${emp.lastName}"></span></td>
-                    <td><span data-th-text="${emp.salary}"></span></td>
+                    <td th:text="${emp.id}"></td>
+                    <td th:text="${emp.firstName}"></td>
+                    <td th:text="${emp.lastName}"></td>
+                    <td th:text="${emp.salary}"></td>
                     <td>
                         <a class="btn-sm btn-delete" th:href="@{/employees/delete/{id}(id=${emp.id})}">Delete</a> 
-                        <a class="btn-sm btn-primary" th:href="@{/employees/edit/{id}(id=${emp.id})}">Edit</a> 
+                        <a class="btn-sm btn-primary" th:href="@{/employees/update/{id}(id=${emp.id})}">Edit</a> 
                     </td>
                 </tr>
             </tbody>

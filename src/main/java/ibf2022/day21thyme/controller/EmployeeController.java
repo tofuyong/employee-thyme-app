@@ -60,7 +60,7 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/update/{id}")
     public String editEmployee(@PathVariable("id") Integer id, Model model) {
         // First retrieve the employee
         Employee retrievedEmp = empSvc.findById(id);
@@ -69,5 +69,12 @@ public class EmployeeController {
         return "updateemployee";
     }
 
-
+    @PostMapping("/saveUpdate") 
+    public String saveUpdateEmployee(@ModelAttribute("employeeForm") Employee employee, BindingResult result) {
+        if (result.hasErrors()) {
+            return "updateemployee";
+        }
+        empSvc.update(employee);
+        return "redirect:/employees";
+    }
 }
