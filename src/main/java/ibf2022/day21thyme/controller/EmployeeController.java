@@ -50,10 +50,10 @@ public class EmployeeController {
         empSvc.save(newEmployee);
         return "redirect:/employees"; //this is a get endpoint; redirecting back to the listing endpoint
         // record will be saved (double check on SQL) but not shown on webpage due to the inner join - no dependant so won't show on the employee list
-        // Solution change repo function from inner join to left join
+        // Solution: change repo function from inner join to left join
     }
 
-    // Get mapping because it is a hyperlink; by default get, not delete
+    // Why GetMapping? By default, hyperlinks are get, not delete
     @GetMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable("id") Integer id) {
         empSvc.delete(id);
