@@ -20,13 +20,11 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm mt-3">
                 <h3>Create New Employee</h3>
             </div>
         </div>
     </div>
-
-    <br><br>
 
     <div class="container">
         <form th:action="@{/employees/save}" th:object="${employeeForm}" method="POST">

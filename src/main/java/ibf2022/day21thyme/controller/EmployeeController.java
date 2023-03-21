@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ibf2022.day21thyme.model.Dependant;
 import ibf2022.day21thyme.model.Employee;
+import ibf2022.day21thyme.service.DependantService;
 import ibf2022.day21thyme.service.EmployeeService;
 
 @Controller
@@ -21,6 +23,10 @@ public class EmployeeController {
     @Autowired
     EmployeeService empSvc;
 
+    @Autowired
+    DependantService depSvc;
+
+    // #1 Show all Employees on listing page
     @GetMapping
     public String listEmployees(Model model) {
         List<Employee> employees = empSvc.findAll();
@@ -28,6 +34,7 @@ public class EmployeeController {
         return "employeelist";
     }
 
+    // #2 Add new Employee
     @GetMapping("/addnew")
     public String createEmployee(Model model) {
         Employee employeeForm = new Employee();
@@ -35,6 +42,7 @@ public class EmployeeController {
         return "newemployee";
     }
 
+    // #3 Post new Employee
     @PostMapping("/save")
     // use model attribute to contain the form data
     // BindingResult has to be the last parameter!
@@ -53,6 +61,7 @@ public class EmployeeController {
         // Solution: change repo function from inner join to left join
     }
 
+    // #4 Delete Employee by Id
     // Why GetMapping? By default, hyperlinks are get, not delete
     @GetMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable("id") Integer id) {
@@ -60,6 +69,7 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
+    // #5 Update Employee by Id
     @GetMapping("/update/{id}")
     public String editEmployee(@PathVariable("id") Integer id, Model model) {
         // First retrieve the employee
@@ -69,6 +79,7 @@ public class EmployeeController {
         return "updateemployee";
     }
 
+    // #6 Save updated Employee in #5
     @PostMapping("/saveUpdate") 
     public String saveUpdateEmployee(@ModelAttribute("employeeForm") Employee employee, BindingResult result) {
         if (result.hasErrors()) {
@@ -77,4 +88,5 @@ public class EmployeeController {
         empSvc.update(employee);
         return "redirect:/employees";
     }
+
 }
